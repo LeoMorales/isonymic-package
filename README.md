@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/LeoMorales/isonymic-package/main/docs/images/simple-image.jpg"><br>
+<img src="https://raw.githubusercontent.com/LeoMorales/isonymic-package/main/static/images/simple-image.jpg"><br>
 
 --------------------------------------
 
