@@ -1,11 +1,15 @@
 from setuptools import find_packages, setup
 
-with open("app/README.md", "r") as f:
+# import os
+# print("os.getcwd()")
+# print(os.getcwd())
+
+with open("/home/lmorales/work/pipelines/package_src/isonymic_package/app/README.md", "r") as f:
     long_description = f.read()
 
 setup(
     name="isonymic",
-    version="0.0.5",
+    version="0.0.1",
     description="A simple Python package for isonymy studies from population surnames",
     package_dir={"": "app"},
     packages=find_packages(where="app"),

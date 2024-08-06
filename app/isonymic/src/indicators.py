@@ -29,4 +29,6 @@ def get_isonymy(surnames_i: pandas.Series) -> float:
         df_surnames_i["relative_frequency"] ** 2
     )
 
-    return df_surnames_i["relative_frequency_squared"].sum()
+    isonymy_value = df_surnames_i["relative_frequency_squared"].sum()
+
+    return isonymy_value

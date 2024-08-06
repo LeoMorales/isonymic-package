@@ -12,6 +12,21 @@ Permite calcular rápidamente indicadores isonímicos tales como el coeficiente 
 También permite obtener frecuencias de apellidos y generar gráficos log-log fácilmente.
 
 
+Modo de uso
+-------------
+
+Debe pasar una Serie de pandas con los apellidos de la población:
+
+    >>> import pandas
+    >>> import isonymic
+
+    >>> surnames = pandas.Series(["Gonzalez", "Gonzalez", "Gonzalez", "Gonzalez", "Gonzalez"])
+    
+    >>> print(isonymic.get_isonymy(surnames))
+
+        1.0
+
+
 Documentation
 -------------
 
