@@ -12,7 +12,7 @@ author = 'Leo Morales, Pablo Navarro, Pablo Toledo, Virginia Ramallo y Claudio D
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('/home/lmorales/work/pipelines/package_surnames/isonymic_package/app/isonymic/src'))
+sys.path.insert(0, os.path.abspath('../../app/isonymic/src'))
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
