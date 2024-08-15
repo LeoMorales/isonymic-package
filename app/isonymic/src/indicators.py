@@ -252,11 +252,6 @@ def get_occurrences_vs_frequencies(surnames_serie: pd.Series) -> pd.DataFrame:
     if surnames_serie.empty:
         raise ValueError("The surnames series must not be empty.")
 
-    # Warning for deprecated function usage
-    print(
-        "Warning: 'getOccurrencesVsFrequencies' is deprecated. Use 'get_occurrences_vs_frequencies' instead."
-    )
-
     # Count the occurrences of each surname
     surname_counts = surnames_serie.value_counts()
 
