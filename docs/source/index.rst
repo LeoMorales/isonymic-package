@@ -20,6 +20,11 @@ Welcome to isonymic's documentation!
     :undoc-members:
     :show-inheritance:
 
+.. automodule:: vis
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Indices and tables
 ==================
 
