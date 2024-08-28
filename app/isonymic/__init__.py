@@ -1,3 +1,4 @@
-from .src.indicators import (
-    get_isonymy,
-)
+from . import indicators
+from . import cleaning
+from . import utils
+from . import vis

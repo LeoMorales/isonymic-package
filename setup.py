@@ -7,7 +7,7 @@ with open(
 
 setup(
     name="isonymic",
-    version="0.0.3",
+    version="0.0.9",
     description="A simple Python package for isonymy studies from population surnames",
     package_dir={"": "app"},
     packages=find_packages(where="app"),

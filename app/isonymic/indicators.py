@@ -1,6 +1,7 @@
 import pandas as pd
 import math
 
+
 def get_isonymy(surnames_i: pd.Series) -> float:
     """Retorna las isonímia interna de una población segun sus apellidos.
 
@@ -18,13 +19,9 @@ def get_isonymy(surnames_i: pd.Series) -> float:
     # get surname | count dataframe
     surnames_i.name = "surname"
 
-    df_surnames_i = (
-        surnames_i.value_counts()
-        .reset_index()
-        .rename(columns=dict(index="surname", surname="counts"))
-    )
+    df_surnames_i = surnames_i.value_counts().reset_index()
 
-    df_surnames_i["relative_frequency"] = df_surnames_i["counts"] / len(surnames_i)
+    df_surnames_i["relative_frequency"] = df_surnames_i["count"] / len(surnames_i)
     df_surnames_i["relative_frequency_squared"] = (
         df_surnames_i["relative_frequency"] ** 2
     )
@@ -37,11 +34,11 @@ def get_isonymy(surnames_i: pd.Series) -> float:
 def get_unbiased_random_isonymy(population_surnames: pd.Series) -> float:
     """Calcula la isonimia interna de una población basada en los apellidos de sus miembros.
 
-    La isonimia es una medida de consanguinidad dentro de una población que se basa en 
+    La isonimia es una medida de consanguinidad dentro de una población que se basa en
     la frecuencia de los apellidos.
 
     Args:
-        population_surnames (pd.Series): Una serie de pandas que contiene los apellidos 
+        population_surnames (pd.Series): Una serie de pandas que contiene los apellidos
             de cada miembro de la población. Cada elemento es un apellido.
 
     Returns:
@@ -57,7 +54,7 @@ def get_unbiased_random_isonymy(population_surnames: pd.Series) -> float:
     df_surnames = (
         population_surnames.value_counts()
         .reset_index()
-        .rename(columns={'index': "surname", 'population_surnames': "frecuencia_abs"})
+        .rename(columns={"index": "surname", "population_surnames": "frecuencia_abs"})
     )
 
     # Calcular el término de isonimia para cada apellido
@@ -76,13 +73,14 @@ def get_unbiased_random_isonymy(population_surnames: pd.Series) -> float:
 
     return isonymy_value
 
+
 def get_distances(surnames_i: pd.Series, surnames_j: pd.Series) -> dict:
     """
     Calculates various isonymic distances between two lists of surnames.
 
-    This function computes and returns a dictionary with the following distances 
+    This function computes and returns a dictionary with the following distances
     between two lists of surnames:
-        
+
     - I_ij: Isonymy between groups i and j.
     - L_ij: Lasker distance between groups i and j.
     - E_ij: Euclidean distance between groups i and j.
@@ -128,7 +126,7 @@ def get_distances(surnames_i: pd.Series, surnames_j: pd.Series) -> dict:
         surnames_i[surnames_i.isin(common_surnames)]
         .value_counts()
         .reset_index()
-        .rename(columns={'index': "surname", 'surnames_i': "counts_i"})
+        .rename(columns={"index": "surname", "surnames_i": "counts_i"})
     )
 
     group_i["relative_frequency_i"] = group_i.counts_i / len_group_i
@@ -137,7 +135,7 @@ def get_distances(surnames_i: pd.Series, surnames_j: pd.Series) -> dict:
         surnames_j[surnames_j.isin(common_surnames)]
         .value_counts()
         .reset_index()
-        .rename(columns={'index': "surname", 'surnames_j': "counts_j"})
+        .rename(columns={"index": "surname", "surnames_j": "counts_j"})
     )
 
     group_j["relative_frequency_j"] = group_j.counts_j / len_group_j
@@ -175,9 +173,10 @@ def get_distances(surnames_i: pd.Series, surnames_j: pd.Series) -> dict:
 
     return distance_dict
 
+
 def get_a_index(surnames_serie: pd.Series) -> float:
     """Returns the A index.
-    
+
     The A index represents the percentage of the population that is the sole bearer of its surname.
 
     Args:
@@ -197,12 +196,16 @@ def get_a_index(surnames_serie: pd.Series) -> float:
     unique_bearers = singles[singles].shape[0]
 
     # Return the A index, handling the potential division by zero
-    return unique_bearers / surnames_serie.shape[0] if surnames_serie.shape[0] > 0 else 0
+    return (
+        unique_bearers / surnames_serie.shape[0] if surnames_serie.shape[0] > 0 else 0
+    )
 
 
-def get_b_index(surnames_serie: pd.Series, return_seven_list: bool = False) -> float or tuple:
+def get_b_index(
+    surnames_serie: pd.Series, return_seven_list: bool = False
+) -> float or tuple:
     """Returns the B index.
-    
+
     The B index represents the percentage of the population included in the seven most frequent surnames.
 
     Args:
@@ -230,10 +233,11 @@ def get_b_index(surnames_serie: pd.Series, return_seven_list: bool = False) -> f
     else:
         return b_index
 
+
 def get_occurrences_vs_frequencies(surnames_serie: pd.Series) -> pd.DataFrame:
     """Returns a dataset of occurrence-frequency based on the received surnames.
 
-    This function generates a dataset that shows the relationship between the number of occurrences of surnames 
+    This function generates a dataset that shows the relationship between the number of occurrences of surnames
     and their respective frequencies, including the logarithmic transformation of these values.
 
     Args:
@@ -245,7 +249,7 @@ def get_occurrences_vs_frequencies(surnames_serie: pd.Series) -> pd.DataFrame:
             - frequency: The frequency of those occurrences.
             - frequency_log: The natural logarithm of the frequency.
             - occurrences_log: The natural logarithm of the occurrences.
-    
+
     Raises:
         ValueError: If the input series is empty.
     """
@@ -269,7 +273,11 @@ def get_occurrences_vs_frequencies(surnames_serie: pd.Series) -> pd.DataFrame:
     )
 
     # Add logarithmic transformations
-    occurrences_freq_df["frequency_log"] = occurrences_freq_df["frequency"].apply(math.log)
-    occurrences_freq_df["occurrences_log"] = occurrences_freq_df["occurrences"].apply(math.log)
+    occurrences_freq_df["frequency_log"] = occurrences_freq_df["frequency"].apply(
+        math.log
+    )
+    occurrences_freq_df["occurrences_log"] = occurrences_freq_df["occurrences"].apply(
+        math.log
+    )
 
     return occurrences_freq_df

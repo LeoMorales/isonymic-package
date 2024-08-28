@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import indicators
+from . import indicators
 
 PLOT_SHOW_N_POPULAR_SURNAMES = 3
 
